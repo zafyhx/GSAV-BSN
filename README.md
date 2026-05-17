@@ -107,20 +107,6 @@ GSAV adalah Progressive Web App (PWA), yang berarti aplikasi ini bisa kamu insta
 
 ---
 
-## 🚢 Deploy ke Vercel
-
-```bash
-# 1. Push ke GitHub
-git add .
-git commit -m "feat: initial release"
-git push origin main
-
-# 2. Import di vercel.com → New Project → pilih repo
-# 3. Set Environment Variables (sama dengan .env.local)
-# 4. Deploy
-```
-
----
 
 ## 📁 Struktur Proyek
 
