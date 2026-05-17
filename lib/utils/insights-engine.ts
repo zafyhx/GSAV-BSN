@@ -117,7 +117,7 @@ export function calculateFinancialSummary(
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1)
 
   const thisMonth = transactions.filter(t => new Date(t.transaction_date) >= startOfMonth)
-  const income = thisMonth.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0)
+  const income = monthlyIncome + thisMonth.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0)
   const expense = thisMonth.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0)
 
   const balance = income - expense

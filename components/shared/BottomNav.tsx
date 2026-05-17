@@ -6,10 +6,10 @@ import { LayoutDashboard, ArrowLeftRight, BarChart2, Wallet } from 'lucide-react
 import { cn } from '@/lib/utils/cn'
 
 const navItems = [
-  { href: '/dashboard', icon: LayoutDashboard, label: 'Home' },
-  { href: '/transactions', icon: ArrowLeftRight, label: 'Transaksi' },
-  { href: '/analytics', icon: BarChart2, label: 'Analitik' },
-  { href: '/budget', icon: Wallet, label: 'Budget' },
+  { href: '/dashboard', icon: LayoutDashboard, label: 'Home', id: 'tour-nav-home' },
+  { href: '/transactions', icon: ArrowLeftRight, label: 'Transaksi', id: 'tour-nav-transactions' },
+  { href: '/analytics', icon: BarChart2, label: 'Analitik', id: 'tour-nav-analytics' },
+  { href: '/budget', icon: Wallet, label: 'Budget', id: 'tour-nav-budget' },
 ]
 
 export function BottomNav() {
@@ -18,11 +18,12 @@ export function BottomNav() {
   return (
     <nav className="bottom-nav">
       <div className="flex items-start justify-around h-full px-2 pt-2">
-        {navItems.map(({ href, icon: Icon, label }) => {
+        {navItems.map(({ href, icon: Icon, label, id }) => {
           const isActive = pathname === href
           return (
             <Link
               key={href}
+              id={id}
               href={href}
               className={cn(
                 'flex flex-col items-center gap-1 px-5 py-1.5 rounded-2xl transition-all duration-200',

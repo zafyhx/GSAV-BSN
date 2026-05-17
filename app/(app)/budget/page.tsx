@@ -62,7 +62,7 @@ export default function BudgetPage() {
 
   return (
     <div className="space-y-4 pt-2 pb-4">
-      <div className="flex items-center justify-between pt-2">
+      <div id="tour-budget-list" className="flex items-center justify-between pt-2">
         <div>
           <h1 className="text-xl font-bold text-text-primary">Budget</h1>
           <p className="text-xs text-text-muted mt-0.5">{MONTH_NAMES[now.getMonth()]} {now.getFullYear()}</p>

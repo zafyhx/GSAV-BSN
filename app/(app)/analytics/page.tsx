@@ -72,7 +72,7 @@ export default function AnalyticsPage() {
       </div>
 
       {/* Summary row */}
-      <div className="grid grid-cols-2 gap-3">
+      <div id="tour-chart-analytics" className="grid grid-cols-2 gap-3">
         <Card>
           <p className="text-xs text-text-muted mb-1">Total Pengeluaran</p>
           <p className="text-xl font-bold text-text-primary mono-number">{formatCurrencyCompact(totalExpense)}</p>

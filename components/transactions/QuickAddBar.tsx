@@ -51,7 +51,7 @@ export function QuickAddBar() {
           id="quick-add-input"
           value={input}
           onChange={e => setInput(e.target.value)}
-          placeholder='contoh: "makan 15000" atau "gaji 500000"'
+          placeholder='contoh: "makan 15000" atau "gaji 500k"'
           className="flex-1 text-sm text-text-primary placeholder:text-text-muted bg-transparent outline-none"
           autoComplete="off"
           autoCorrect="off"

@@ -85,58 +85,25 @@ Set limit bulanan per kategori. GSAV akan memperingatkan saat mendekati atau mel
 
 ---
 
-## 🛠️ Panduan Setup
+## 📲 Panduan Instalasi di HP (PWA)
 
-### Prasyarat
-- Node.js 18+
-- Akun [Supabase](https://supabase.com) (gratis)
+GSAV adalah Progressive Web App (PWA), yang berarti aplikasi ini bisa kamu instal langsung di HP kamu tanpa perlu download dari App Store atau Play Store. Ringan, cepat, dan bekerja fullscreen seperti aplikasi native!
 
-### 1. Clone & Install
+### 🍏 Cara Instal di iPhone / iOS
 
-```bash
-git clone https://github.com/username/gsav.git
-cd gsav
-npm install
-```
+1. Buka link web app GSAV di browser **Safari** (wajib menggunakan Safari).
+2. Ketuk tombol **Share** (ikon kotak dengan panah ke atas di bagian bawah).
+3. Gulir ke bawah lalu pilih opsi **"Add to Home Screen"** (Tambah ke Layar Utama).
+4. Beri nama **GSAV** lalu ketuk **Add** di pojok kanan atas.
+5. Buka aplikasi dari layar utama HP kamu! Aplikasi akan berjalan fullscreen tanpa bar browser.
 
-### 2. Setup Database Supabase
+### 🤖 Cara Instal di Android
 
-1. Buat project baru di [supabase.com](https://supabase.com/dashboard)
-2. Buka **SQL Editor** → New Query
-3. Paste isi file [`supabase/schema.sql`](./supabase/schema.sql) → **Run**
-
-> Schema akan otomatis membuat semua tabel, RLS policies, trigger auto-create profil, dan seed 9 kategori default saat user baru mendaftar.
-
-### 3. Konfigurasi Environment
-
-```bash
-cp .env.local.example .env.local
-```
-
-Isi `.env.local` dengan kredensial dari **Supabase Dashboard → Project Settings → API**:
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=https://xxxxxxxx.supabase.co
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_xxxxx...
-```
-
-### 4. Jalankan Development Server
-
-```bash
-npm run dev
-```
-
-Buka [http://localhost:3000](http://localhost:3000) di browser.
-
----
-
-## 📱 Install di iPhone (PWA)
-
-1. Buka URL app di **Safari** (wajib Safari, bukan Chrome)
-2. Tap ikon **Share** (kotak dengan panah atas)
-3. Scroll ke bawah → pilih **"Add to Home Screen"**
-4. Beri nama **GSAV** → tap **Add**
-5. Buka dari Home Screen → tampil fullscreen seperti app native 🎉
+1. Buka link web app GSAV di browser **Google Chrome**.
+2. Ketuk ikon **titik tiga** di pojok kanan atas.
+3. Pilih opsi **"Add to Home screen"** (Tambah ke Layar Utama) atau **"Install app"** (Instal aplikasi).
+4. Konfirmasi dengan mengetuk **Install**.
+5. Ikon GSAV akan muncul di layar utama dan app drawer HP kamu, siap digunakan fullscreen!
 
 ---
 

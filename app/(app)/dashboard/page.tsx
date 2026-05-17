@@ -21,7 +21,7 @@ export default function DashboardPage() {
   return (
     <div className="space-y-4 pt-2 pb-4">
       {/* Header */}
-      <div className="sticky-header flex items-center justify-between pb-3 -mx-4 px-4 border-b border-white/5 mb-4 shadow-sm shadow-black/50">
+      <div id="tour-header" className="sticky-header flex items-center justify-between pb-3 -mx-4 px-4 border-b border-white/5 mb-4 shadow-sm shadow-black/50">
         <div className="flex flex-col justify-center">
           <p className="text-[11px] font-bold text-text-muted uppercase tracking-widest mb-0.5">
             {greeting}
@@ -30,7 +30,7 @@ export default function DashboardPage() {
             {firstName}
           </h1>
         </div>
-        <Link href="/settings">
+        <Link href="/settings" id="tour-profile-settings">
           <div className="w-9 h-9 rounded-full bg-accent-purple/20 border border-accent-purple/30 flex items-center justify-center">
             <span className="text-sm font-semibold text-accent-purple">
               {firstName[0]?.toUpperCase()}
@@ -40,16 +40,22 @@ export default function DashboardPage() {
       </div>
 
       {/* Balance */}
-      <BalanceCard />
+      <div id="tour-balance">
+        <BalanceCard />
+      </div>
 
       {/* Burn Rate */}
-      <BurnRateWidget />
+      <div id="tour-burn-rate">
+        <BurnRateWidget />
+      </div>
 
       {/* Insights */}
       <InsightBanner />
 
       {/* Quick Add */}
-      <QuickAddBar />
+      <div id="tour-quick-add">
+        <QuickAddBar />
+      </div>
 
       {/* Recent Transactions */}
       <div>

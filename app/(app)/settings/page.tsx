@@ -7,7 +7,7 @@ import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { Card } from '@/components/ui/Card'
 import { parseAmountString, formatCurrency } from '@/lib/utils/currency'
-import { User, DollarSign, LogOut, ChevronRight, Plus, TrendingUp, Trash2 } from 'lucide-react'
+import { User, DollarSign, LogOut, ChevronRight, Plus, TrendingUp, Trash2, HelpCircle } from 'lucide-react'
 import { DynamicIcon, AVAILABLE_ICONS } from '@/components/ui/DynamicIcon'
 import { BottomSheet } from '@/components/ui/BottomSheet'
 import toast from 'react-hot-toast'
@@ -84,7 +84,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Menu sections */}
-      <div>
+      <div id="tour-settings-profile">
         <p className="text-xs text-text-muted font-semibold uppercase tracking-widest mb-2 px-1">Akun</p>
         <Card className="divide-y divide-border p-0 overflow-hidden">
           <button onClick={openProfileSheet} className="w-full flex items-center gap-3 px-4 py-3.5 tap-highlight">
@@ -144,6 +144,29 @@ export default function SettingsPage() {
               </div>
             ))}
           </div>
+        </Card>
+      </div>
+
+      {/* Bantuan */}
+      <div>
+        <p className="text-xs text-text-muted font-semibold uppercase tracking-widest mb-2 px-1">Bantuan</p>
+        <Card className="p-0 overflow-hidden">
+          <button
+            onClick={() => {
+              localStorage.removeItem('gsav_has_seen_tour')
+              router.push('/dashboard')
+            }}
+            className="w-full flex items-center gap-3 px-4 py-3.5 tap-highlight"
+          >
+            <div className="w-8 h-8 rounded-xl bg-accent-amber/15 flex items-center justify-center">
+              <HelpCircle className="w-4 h-4 text-accent-amber" />
+            </div>
+            <div className="flex-1 text-left">
+              <p className="text-sm font-medium text-text-primary">Mulai Ulang Tutorial</p>
+              <p className="text-xs text-text-muted">Pelajari kembali fitur-fitur utama GSAV</p>
+            </div>
+            <ChevronRight className="w-4 h-4 text-text-muted" />
+          </button>
         </Card>
       </div>
 

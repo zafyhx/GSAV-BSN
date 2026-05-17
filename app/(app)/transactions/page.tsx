@@ -52,7 +52,7 @@ export default function TransactionsPage() {
       />
 
       {/* Filter tabs */}
-      <div className="flex gap-2">
+      <div id="tour-filter-transaction" className="flex gap-2">
         {filters.map(f => (
           <button
             key={f.value}
