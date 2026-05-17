@@ -16,9 +16,10 @@ export const AVAILABLE_ICONS = Object.keys(ICON_MAP)
 interface DynamicIconProps {
   name: string
   className?: string
+  style?: React.CSSProperties
 }
 
-export function DynamicIcon({ name, className }: DynamicIconProps) {
+export function DynamicIcon({ name, className, style }: DynamicIconProps) {
   const Icon = ICON_MAP[name] || Package
-  return <Icon className={className} />
+  return <Icon className={className} style={style} />
 }
