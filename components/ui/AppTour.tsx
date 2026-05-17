@@ -5,8 +5,8 @@ import { driver, Driver } from 'driver.js'
 import 'driver.js/dist/driver.css'
 import { useRouter, usePathname } from 'next/navigation'
 
-const waitForElement = (selector: string): Promise<void> => {
-  return new Promise(resolve => {
+const waitForElement = (selector: string, timeout = 5000): Promise<void> => {
+  return new Promise((resolve, reject) => {
     if (document.querySelector(selector)) {
       return resolve()
     }
@@ -17,6 +17,11 @@ const waitForElement = (selector: string): Promise<void> => {
       }
     })
     observer.observe(document.body, { childList: true, subtree: true })
+    // Safety timeout: resolve anyway so the tour is never permanently stuck
+    setTimeout(() => {
+      observer.disconnect()
+      resolve()
+    }, timeout)
   })
 }
 
@@ -66,9 +71,21 @@ export function AppTour() {
       nextBtnText: 'Lanjut',
       prevBtnText: 'Kembali',
       doneBtnText: 'Selesai',
-      allowClose: false, // Prevent accidental close during transitions
+      // allowClose:true + onCloseClick is safer than allowClose:false + confirm()
+      // because window.confirm() is often blocked/returns false in Android WebViews/PWAs
+      allowClose: true,
+      onCloseClick: () => {
+        // Only show skip-confirm if tour is still in progress
+        if (driverObj.hasNextStep()) {
+          const confirmed = window.confirm('Yakin ingin melewati tutorial ini?')
+          if (!confirmed) return
+        }
+        localStorage.setItem('gsav_has_seen_tour', 'true')
+        driverObj.destroy()
+        setIsTourActive(false)
+      },
       onDestroyStarted: () => {
-        if (!driverObj.hasNextStep() || confirm('Yakin ingin melewati tutorial ini?')) {
+        if (!driverObj.hasNextStep()) {
           localStorage.setItem('gsav_has_seen_tour', 'true')
           driverObj.destroy()
           setIsTourActive(false)
@@ -119,7 +136,8 @@ export function AppTour() {
             title: 'Analitik Keuangan', 
             description: 'Selanjutnya, mari lihat laporan keuanganmu.', 
             side: 'top', align: 'center',
-            onNextClick: (_, __, { driver }) => handleNextRoute('/analytics', '#tour-chart-analytics', driver)
+            onNextClick: (_, __, { driver }) => handleNextRoute('/analytics', '#tour-chart-analytics', driver),
+            onPrevClick: (_, __, { driver }) => handlePrevRoute('/transactions', '#tour-filter-transaction', driver)
           }
         },
         {
@@ -128,6 +146,10 @@ export function AppTour() {
             title: 'Ringkasan Cerdas', 
             description: 'Pantau rata-rata pengeluaran harian dan ketahui kategori apa yang paling boros bulan ini.', 
             side: 'bottom', align: 'center',
+            onNextClick: async (_, __, { driver }) => {
+              await waitForElement('#tour-nav-budget')
+              driver.moveNext()
+            },
             onPrevClick: (_, __, { driver }) => handlePrevRoute('/transactions', '#tour-nav-analytics', driver)
           }
         },
