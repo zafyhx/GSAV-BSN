@@ -5,7 +5,7 @@ import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff, Mail } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 export default function RegisterPage() {
@@ -14,6 +14,7 @@ export default function RegisterPage() {
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
   const router = useRouter()
   const supabase = createClient()
 
@@ -25,7 +26,7 @@ export default function RegisterPage() {
     }
     setLoading(true)
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -35,6 +36,12 @@ export default function RegisterPage() {
 
     if (error) {
       toast.error(error.message)
+      setLoading(false)
+      return
+    }
+
+    if (!data.session) {
+      setIsSuccess(true)
       setLoading(false)
       return
     }
@@ -58,9 +65,27 @@ export default function RegisterPage() {
         />
       </div>
 
-      {/* Form */}
+      {/* Form or Success State */}
       <div className="w-full max-w-sm">
-        
+        {isSuccess ? (
+          <div className="bg-bg-surface border border-border p-8 rounded-3xl text-center flex flex-col items-center">
+            <div className="w-16 h-16 bg-accent-green/20 text-accent-green rounded-full flex items-center justify-center mb-5">
+              <Mail className="w-8 h-8" />
+            </div>
+            <h2 className="text-xl font-bold text-text-primary mb-2">Cek Email Kamu!</h2>
+            <p className="text-sm text-text-secondary leading-relaxed mb-8">
+              Kami telah mengirimkan link verifikasi ke <br />
+              <strong className="text-text-primary font-semibold">{email}</strong><br /><br />
+              Silakan cek inbox atau folder spam kamu untuk mengaktifkan akun.
+            </p>
+            <button
+              onClick={() => router.push('/login')}
+              className="w-full py-3.5 bg-bg-elevated border border-border text-text-primary font-semibold rounded-2xl transition-all hover:bg-bg-primary active:scale-95 text-sm"
+            >
+              Kembali ke Login
+            </button>
+          </div>
+        ) : (
 
         <form onSubmit={handleRegister} className="space-y-4">
           <div className="space-y-1.5">
@@ -134,6 +159,7 @@ export default function RegisterPage() {
             Masuk
           </Link>
         </p>
+        )}
       </div>
     </div>
   )
