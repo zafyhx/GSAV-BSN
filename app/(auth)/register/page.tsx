@@ -47,19 +47,15 @@ export default function RegisterPage() {
   return (
     <div className="min-h-dvh bg-bg-primary flex flex-col items-center justify-center px-6 py-12">
       {/* Logo */}
-      <div className="mb-10 flex flex-col items-center gap-3">
+      <div className="mb-10 flex flex-col items-center">
         <Image 
-          src="/icons/icon-192.png" 
+          src="/logo.png" 
           alt="GSAV Logo" 
-          width={64} 
-          height={64} 
-          className="rounded-2xl shadow-lg shadow-accent-green/20"
+          width={240} 
+          height={120} 
+          className="object-contain"
           priority
         />
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-text-primary tracking-tight">GSAV</h1>
-          <p className="text-sm text-text-secondary mt-0.5">Budget Spending Navigator</p>
-        </div>
       </div>
 
       {/* Form */}

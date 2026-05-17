@@ -21,10 +21,14 @@ export default function DashboardPage() {
   return (
     <div className="space-y-4 pt-2 pb-4">
       {/* Header */}
-      <div className="flex items-center justify-between pt-2">
-        <div>
-          <p className="text-xs text-text-muted">{greeting} 👋</p>
-          <h1 className="text-xl font-bold text-text-primary">{firstName}</h1>
+      <div className="sticky-header flex items-center justify-between pb-3 -mx-4 px-4 border-b border-white/5 mb-4 shadow-sm shadow-black/50">
+        <div className="flex flex-col justify-center">
+          <p className="text-[11px] font-bold text-text-muted uppercase tracking-widest mb-0.5">
+            {greeting}
+          </p>
+          <h1 className="text-lg font-semibold tracking-tight text-text-primary">
+            {firstName}
+          </h1>
         </div>
         <Link href="/settings">
           <div className="w-9 h-9 rounded-full bg-accent-purple/20 border border-accent-purple/30 flex items-center justify-center">

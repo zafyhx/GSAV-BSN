@@ -67,6 +67,19 @@ body {
   padding-bottom: max(calc(env(safe-area-inset-bottom) + var(--nav-height) + 80px), calc(var(--nav-height) + 88px));
 }
 
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  /* Negative margin pulls it up into the safe-top area of main, 
+     then padding pushes the content back down */
+  margin-top: calc(max(env(safe-area-inset-top), 16px) * -1);
+  padding-top: max(env(safe-area-inset-top), 16px);
+  background: rgba(8, 8, 8, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
 /* ============================================
    Glass card effect
    ============================================ */

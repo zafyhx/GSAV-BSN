@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Providers } from './providers'
+import { SplashScreen } from '@/components/ui/SplashScreen'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
       <body className={`${inter.variable} font-sans bg-bg-primary text-text-primary antialiased`}>
+        <SplashScreen />
         <Providers>{children}</Providers>
       </body>
     </html>
