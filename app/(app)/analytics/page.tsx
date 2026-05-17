@@ -57,7 +57,7 @@ export default function AnalyticsPage() {
 
   if (!expenses.length) {
     return (
-      <div className="pt-4">
+      <div id="tour-chart-analytics" className="pt-4">
         <h1 className="text-xl font-bold text-text-primary mb-6">Analitik</h1>
         <EmptyState icon={BarChart2} title="Belum ada data" description="Tambah transaksi untuk melihat analitik pengeluaranmu" />
       </div>
@@ -65,14 +65,14 @@ export default function AnalyticsPage() {
   }
 
   return (
-    <div className="space-y-5 pt-2 pb-4">
+    <div id="tour-chart-analytics" className="space-y-5 pt-2 pb-4">
       <div className="pt-2">
         <h1 className="text-xl font-bold text-text-primary">Analitik</h1>
         <p className="text-xs text-text-muted mt-0.5">{MONTH_NAMES[now.getMonth()]} {now.getFullYear()}</p>
       </div>
 
       {/* Summary row */}
-      <div id="tour-chart-analytics" className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-3">
         <Card>
           <p className="text-xs text-text-muted mb-1">Total Pengeluaran</p>
           <p className="text-xl font-bold text-text-primary mono-number">{formatCurrencyCompact(totalExpense)}</p>

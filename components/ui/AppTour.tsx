@@ -53,12 +53,16 @@ export function AppTour() {
   const handleNextRoute = async (path: string, selector: string, driverObj: Driver) => {
     router.push(path)
     await waitForElement(selector)
+    // Small delay to let React finish its render cycle before highlighting
+    await new Promise(r => setTimeout(r, 300))
     driverObj.moveNext()
   }
 
   const handlePrevRoute = async (path: string, selector: string, driverObj: Driver) => {
     router.push(path)
     await waitForElement(selector)
+    // Small delay to let React finish its render cycle before highlighting
+    await new Promise(r => setTimeout(r, 300))
     driverObj.movePrevious()
   }
 
@@ -144,10 +148,11 @@ export function AppTour() {
           element: '#tour-chart-analytics',
           popover: { 
             title: 'Ringkasan Cerdas', 
-            description: 'Pantau rata-rata pengeluaran harian dan ketahui kategori apa yang paling boros bulan ini.', 
+            description: 'Di sini kamu bisa pantau rata-rata pengeluaran harian dan kategori paling boros. Makin banyak transaksi, makin detail analisanya!', 
             side: 'bottom', align: 'center',
             onNextClick: async (_, __, { driver }) => {
               await waitForElement('#tour-nav-budget')
+              await new Promise(r => setTimeout(r, 300))
               driver.moveNext()
             },
             onPrevClick: (_, __, { driver }) => handlePrevRoute('/transactions', '#tour-nav-analytics', driver)
