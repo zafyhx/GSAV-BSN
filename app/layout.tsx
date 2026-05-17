@@ -7,7 +7,7 @@ import { SplashScreen } from '@/components/ui/SplashScreen'
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
-  title: 'GSAV — Budget Spending Navigator',
+  title: 'GSAV | Budget Spending Navigator',
   description: 'Personal financial OS untuk mahasiswa. Track pengeluaran, kelola budget, dan dapatkan insight keuangan.',
   manifest: '/manifest.json',
   appleWebApp: {
