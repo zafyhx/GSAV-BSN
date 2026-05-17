@@ -32,10 +32,10 @@ export function SplashScreen() {
     <AnimatePresence>
       {show && (
         <motion.div
-          className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-white"
+          className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-bg-primary"
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, scale: 1.05 }}
-          transition={{ duration: 0.5, ease: 'easeInOut' }}
+          exit={{ opacity: 0, scale: 1.02 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
