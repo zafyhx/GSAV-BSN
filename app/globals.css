@@ -63,7 +63,8 @@ body {
 }
 
 .safe-bottom {
-  padding-bottom: max(calc(env(safe-area-inset-bottom) + var(--nav-height)), calc(var(--nav-height) + 8px));
+  /* Provide enough space for BottomNav + FAB (80px extra) */
+  padding-bottom: max(calc(env(safe-area-inset-bottom) + var(--nav-height) + 80px), calc(var(--nav-height) + 88px));
 }
 
 /* ============================================

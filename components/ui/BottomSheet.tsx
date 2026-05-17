@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { X } from 'lucide-react'
 import { cn } from '@/lib/utils/cn'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useDragControls } from 'framer-motion'
 
 interface BottomSheetProps {
   open: boolean
@@ -15,6 +15,7 @@ interface BottomSheetProps {
 
 export function BottomSheet({ open, onClose, title, children, className }: BottomSheetProps) {
   const overlayRef = useRef<HTMLDivElement>(null)
+  const dragControls = useDragControls()
 
   // Prevent body scroll when sheet is open
   useEffect(() => {
@@ -53,24 +54,40 @@ export function BottomSheet({ open, onClose, title, children, className }: Botto
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+            drag="y"
+            dragControls={dragControls}
+            dragListener={false}
+            dragConstraints={{ top: 0, bottom: 0 }}
+            dragElastic={{ top: 0, bottom: 1 }}
+            onDragEnd={(e, info) => {
+              if (info.offset.y > 100 || info.velocity.y > 500) {
+                onClose()
+              }
+            }}
           >
-            {/* Handle */}
-            <div className="flex justify-center pt-3 pb-1 flex-shrink-0">
-              <div className="w-10 h-1 rounded-full bg-border-strong" />
-            </div>
-
-            {/* Header */}
-            {title && (
-              <div className="flex items-center justify-between px-5 py-3 flex-shrink-0">
-                <h2 className="text-base font-semibold text-text-primary">{title}</h2>
-                <button
-                  onClick={onClose}
-                  className="w-8 h-8 rounded-full bg-bg-surface flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors"
-                >
-                  <X className="w-4 h-4" />
-                </button>
+            {/* Header / Drag Handle Area */}
+            <div 
+              className="flex-shrink-0 touch-none select-none cursor-grab active:cursor-grabbing"
+              onPointerDown={(e) => dragControls.start(e)}
+            >
+              {/* Handle */}
+              <div className="flex justify-center pt-3 pb-1">
+                <div className="w-10 h-1 rounded-full bg-border-strong" />
               </div>
-            )}
+
+              {/* Header */}
+              {title && (
+                <div className="flex items-center justify-between px-5 py-3">
+                  <h2 className="text-base font-semibold text-text-primary">{title}</h2>
+                  <button
+                    onClick={onClose}
+                    className="w-8 h-8 rounded-full bg-bg-surface flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
+            </div>
 
             {/* Content — scrollable */}
             <div className="px-5 pb-[max(env(safe-area-inset-bottom),48px)] overflow-y-auto overscroll-contain">
