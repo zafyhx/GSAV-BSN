@@ -86,8 +86,8 @@ export default function RegisterPage() {
             </button>
           </div>
         ) : (
-
-        <form onSubmit={handleRegister} className="space-y-4">
+          <>
+            <form onSubmit={handleRegister} className="space-y-4">
           <div className="space-y-1.5">
             <label className="text-sm text-text-secondary font-medium" htmlFor="displayName">
               Nama Kamu
@@ -159,6 +159,7 @@ export default function RegisterPage() {
             Masuk
           </Link>
         </p>
+        </>
         )}
       </div>
     </div>
