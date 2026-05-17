@@ -4,6 +4,8 @@ import { createClient } from '@/lib/supabase/client'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Budget, BudgetFormData } from '@/types'
 import toast from 'react-hot-toast'
+import { useTourContext } from '@/lib/context/TourContext'
+import { DUMMY_BUDGETS } from '@/lib/constants/tour-dummy-data'
 
 const supabase = createClient()
 
@@ -22,10 +24,11 @@ export function useBudgets(year?: number, month?: number) {
   const now = new Date()
   const y = year ?? now.getFullYear()
   const m = month ?? now.getMonth() + 1
+  const { isTourActive } = useTourContext()
 
   return useQuery({
-    queryKey: ['budgets', y, m],
-    queryFn: () => fetchBudgets(y, m),
+    queryKey: ['budgets', y, m, isTourActive],
+    queryFn: () => isTourActive ? DUMMY_BUDGETS : fetchBudgets(y, m),
   })
 }
 

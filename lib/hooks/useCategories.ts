@@ -4,6 +4,8 @@ import { createClient } from '@/lib/supabase/client'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Category } from '@/types'
 import toast from 'react-hot-toast'
+import { useTourContext } from '@/lib/context/TourContext'
+import { DUMMY_CATEGORIES } from '@/lib/constants/tour-dummy-data'
 
 const supabase = createClient()
 
@@ -18,9 +20,11 @@ async function fetchCategories(): Promise<Category[]> {
 }
 
 export function useCategories() {
+  const { isTourActive } = useTourContext()
+
   return useQuery({
-    queryKey: ['categories'],
-    queryFn: fetchCategories,
+    queryKey: ['categories', isTourActive],
+    queryFn: () => isTourActive ? DUMMY_CATEGORIES : fetchCategories(),
     staleTime: 5 * 60 * 1000, // 5 min — categories rarely change
   })
 }

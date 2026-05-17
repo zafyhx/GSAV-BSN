@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { driver, Driver } from 'driver.js'
 import 'driver.js/dist/driver.css'
 import { useRouter, usePathname } from 'next/navigation'
+import { useTourContext } from '@/lib/context/TourContext'
 
 const waitForElement = (selector: string, timeout = 5000): Promise<void> => {
   return new Promise((resolve, reject) => {
@@ -27,7 +28,7 @@ const waitForElement = (selector: string, timeout = 5000): Promise<void> => {
 
 export function AppTour() {
   const [isMounted, setIsMounted] = useState(false)
-  const [isTourActive, setIsTourActive] = useState(false)
+  const { isTourActive, setIsTourActive } = useTourContext()
   const router = useRouter()
   const pathname = usePathname()
 

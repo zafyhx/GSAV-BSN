@@ -4,6 +4,8 @@ import { createClient } from '@/lib/supabase/client'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Transaction, TransactionFormData } from '@/types'
 import toast from 'react-hot-toast'
+import { useTourContext } from '@/lib/context/TourContext'
+import { DUMMY_TRANSACTIONS } from '@/lib/constants/tour-dummy-data'
 
 const supabase = createClient()
 
@@ -34,16 +36,20 @@ async function fetchTransactionsByMonth(year: number, month: number): Promise<Tr
 }
 
 export function useTransactions(limit = 100) {
+  const { isTourActive } = useTourContext()
+
   return useQuery({
-    queryKey: ['transactions', limit],
-    queryFn: () => fetchTransactions(limit),
+    queryKey: ['transactions', limit, isTourActive],
+    queryFn: () => isTourActive ? DUMMY_TRANSACTIONS : fetchTransactions(limit),
   })
 }
 
 export function useTransactionsByMonth(year: number, month: number) {
+  const { isTourActive } = useTourContext()
+
   return useQuery({
-    queryKey: ['transactions', year, month],
-    queryFn: () => fetchTransactionsByMonth(year, month),
+    queryKey: ['transactions', year, month, isTourActive],
+    queryFn: () => isTourActive ? DUMMY_TRANSACTIONS : fetchTransactionsByMonth(year, month),
   })
 }
 
