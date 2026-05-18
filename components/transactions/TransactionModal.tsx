@@ -38,7 +38,7 @@ export function TransactionModal({ open, onClose, transaction }: TransactionModa
       setAmount(transaction.amount.toString())
       setCategoryId(transaction.category_id ?? '')
       setNote(transaction.note ?? '')
-      setDate(transaction.transaction_date.slice(0, 16))
+      setDate(toLocalDateTimeString(new Date(transaction.transaction_date)))
     } else {
       setType('expense')
       setAmount('')
